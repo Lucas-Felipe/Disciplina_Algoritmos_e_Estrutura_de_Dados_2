@@ -40,4 +40,29 @@ class BST:
     def contains(self, value):
         """Retorna true se encontrar um dado valor na árvore"""
         return self._contains(self.root, value)
+    def print_tree(self):
+        """printa a árvore"""
+        self._print_tree(self.root, 0, "Root:")
 
+    def _print_tree(self, root, level, prefix):
+        if root is not None:
+            print(" " * (level * 4) + prefix + str(root.value))
+            if root.left_child is not None or root.right_child is not None:
+                if root.left_child:
+                    self._print_tree(root.left_child, level + 1, "L--- ")
+                if root.right_child:
+                    self._print_tree(root.right_child, level + 1, "R--- ")
+
+
+
+bst = BST()
+
+bst.add(5)
+bst.add(3)
+bst.add(9)
+bst.add(1)
+bst.add(8)
+bst.add(10)
+bst.add(6)
+
+bst.print_tree()

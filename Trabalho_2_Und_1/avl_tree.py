@@ -5,7 +5,8 @@ from bst import BST
 
 class AVLTree(BST):
     """ classe da Árvore AVL"""
-    super().__init__()
+    def __init__(self):
+        super().__init__()
     # This code is the same we had in the BST class
     def _add_recursive(self, current_node, value):
         if current_node is None:

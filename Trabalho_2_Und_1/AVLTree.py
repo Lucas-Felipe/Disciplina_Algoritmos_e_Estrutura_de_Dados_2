@@ -5,8 +5,7 @@ from BST import BST
 
 class AVLTree(BST):
     """ classe da Árvore AVL"""
-    def __init__(self):
-        super().__init__()
+    super().__init__()
     # This code is the same we had in the BST class
     def _add_recursive(self, current_node, value):
         if current_node is None:
@@ -16,10 +15,10 @@ class AVLTree(BST):
         # This is necessary not to change add() in BST class.
         # When the first node is added, the type of the root is Node, then we need to do a casting
         if isinstance(current_node, Node) and not isinstance(current_node, AVLNode):
-          current_node = AVLNode(current_node.value)
-          current_node.left_child = self.root.left_child
-          current_node.right_child = self.root.right_child
-          self.root = current_node
+            current_node = AVLNode(current_node.value)
+            current_node.left_child = self.root.left_child
+            current_node.right_child = self.root.right_child
+            self.root = current_node
 
         if value <= current_node.value:
             current_node.left_child = self._add_recursive(current_node.left_child, value)
@@ -31,10 +30,12 @@ class AVLTree(BST):
 
         return current_node
     def get_height(self):
+        """Retorna a altura do nó"""
         if self.root is None:
             return 0
         return self.root.height
     def inorder_traversal(self, root):
+        """Ordena a árvore"""
         result = []
         if root:
             result = self.inorder_traversal(root.left_child)
@@ -118,6 +119,7 @@ class AVLTree(BST):
             self._search_prefix(node.right_child, prefix, results)
 
     def search_words_with_prefix(self, prefix):
+        """Função de procura palavra pelo prefixo"""
         results = []
         self._search_prefix(self.root, prefix, results)
         return results
@@ -134,6 +136,7 @@ class AVLTree(BST):
         self._remove_duplicates(node.right_child, unique_words)
 
     def remove_duplicates(self):
+        """Função de remoção de palavras duplicadas"""
         unique_words = set()
         self._remove_duplicates(self.root, unique_words)
 
@@ -143,3 +146,4 @@ class AVLTree(BST):
             new_tree.add(word)
 
         return new_tree
+    

@@ -7,7 +7,7 @@ words = text.split()
 avl_tree = AVLTree()
 
 for word in words:
-    word = word.lower()
+    word = word.lower().replace(',','')
     avl_tree.add(word)
 
 avl_tree_sem_repeticao = avl_tree.remove_duplicates()
@@ -16,8 +16,9 @@ print("Palavras na árvore AVL ordenadas:")
 print(sorted_unique_words)
 
 prefix = input("Digite o prefixo a ser buscado: ")
-prefix = prefix.lower()
+prefix = prefix.lower().replace(',','')
 words_with_prefix = avl_tree_sem_repeticao.search_words_with_prefix(prefix)
+words_with_prefix.sort()
 
 if words_with_prefix:
     print(f"Palavras com o prefixo '{prefix}':")

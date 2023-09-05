@@ -107,6 +107,44 @@ class AVLTree(BST):
 
         # Return the pivot as the new root of this subtree
         return pivot
+    def _balance(self, node):
+        """
+        Balances the subtree rooted at the given node by performing rotations as needed.
+
+        If the imbalance factor of the given node is 2 or -2, rotations are performed
+        to bring the subtree back into balance. This method also takes into account
+        the imbalance factors of the child nodes to decide which type of rotation is needed
+        (single or double).
+
+        Args:
+            node (AVLNode): The root node of the subtree that needs to be balanced.
+
+        Returns:
+            AVLNode: The new root node of the balanced subtree.
+
+        Note:
+            This method assumes that the height and imbalance factor of each node are up-to-date.
+        """
+        # Case 1: Left subtree is higher than right subtree
+        if node.imbalance == 2:
+            pivot = node.left_child
+            # Single right rotation
+            if pivot.imbalance == 1:
+                return self._rotate_right(node)
+            # Double rotation: Left-Right
+            else:
+                node.left_child = self._rotate_left(pivot)
+                return self._rotate_right(node)
+        # Case 2: Right subtree is higher than left subtree
+        else:
+            pivot = node.right_child
+            # Single left rotation
+            if pivot.imbalance == -1:
+                return self._rotate_left(node)
+            # Double rotation: Right-Left
+            else:
+                node.right_child = self._rotate_right(pivot)
+                return self._rotate_left(node)
     def _search_prefix(self, node, prefix, results):
         if node is None:
             return

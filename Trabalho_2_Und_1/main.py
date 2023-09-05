@@ -13,6 +13,13 @@ class BST:
     def add(self, value):
         """Adiciona um nó usando recursividade, valores menores à 
         esquerda do nó, maiores à direita"""
+        stop_words = ["a", "o", "em", "de", "para", "com", "é"]
+        word = value.lower()
+        
+        # Verifica se a palavra está na lista de palavras de parada
+        if word in stop_words:
+            return
+
         if self.root is None:
             self.root = Node(value)
         else:
@@ -178,6 +185,44 @@ class AVLTree(BST):
 
         # Return the pivot as the new root of this subtree
         return pivot
+    def _search_prefix(self, node, prefix, results):
+        if node is None:
+            return
+
+        if node.value.startswith(prefix):
+            results.append(node.value)
+
+        if prefix < node.value:
+            self._search_prefix(node.left_child, prefix, results)
+        elif prefix > node.value:
+            self._search_prefix(node.right_child, prefix, results)
+
+    def search_words_with_prefix(self, prefix):
+        results = []
+        self._search_prefix(self.root, prefix, results)
+        return results
+    def _remove_duplicates(self, node, unique_words):
+        if node is None:
+            return
+
+        # Verifica se a palavra já foi adicionada ao conjunto de palavras únicas
+        if node.value not in unique_words:
+            unique_words.add(node.value)
+
+        # Recursivamente, remove duplicatas da subárvore esquerda e direita
+        self._remove_duplicates(node.left_child, unique_words)
+        self._remove_duplicates(node.right_child, unique_words)
+
+    def remove_duplicates(self):
+        unique_words = set()
+        self._remove_duplicates(self.root, unique_words)
+
+        # Cria uma nova árvore AVL com as palavras únicas
+        new_tree = AVLTree()
+        for word in unique_words:
+            new_tree.add(word)
+
+        return new_tree
 # bst = BST()
 
 # bst.add(5)
@@ -206,6 +251,18 @@ for word in words:
     word = word.lower()  # Converta para minúsculas para tratar palavras iguais independentemente de maiúsculas e minúsculas
     avl_tree.add(word)
 
-sorted_words = avl_tree.inorder_traversal(avl_tree.root)
+# sorted_words = avl_tree.inorder_traversal(avl_tree.root)
+avl_tree_sem_repeticao = avl_tree.remove_duplicates()
+sorted_unique_words = avl_tree_sem_repeticao.inorder_traversal(avl_tree_sem_repeticao.root)
 print("Palavras na árvore AVL ordenadas:")
-print(sorted_words)
+print(sorted_unique_words)
+
+prefix = input("Digite o prefixo a ser buscado: ")
+prefix = prefix.lower()
+words_with_prefix = avl_tree_sem_repeticao.search_words_with_prefix(prefix)
+
+if words_with_prefix:
+    print(f"Palavras com o prefixo '{prefix}':")
+    print(words_with_prefix)
+else:
+    print(f"Nenhuma palavra encontrada com o prefixo '{prefix}'.")

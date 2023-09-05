@@ -1,6 +1,4 @@
 """Arquivo de classe representando uma árvore de busca binária"""
-import re
-from unidecode import unidecode
 from node import Node
 
 class BST:
@@ -11,27 +9,10 @@ class BST:
     def add(self, value):
         """Adiciona um nó usando recursividade, valores menores à 
         esquerda do nó, maiores à direita"""
-        stop_words = ["a", "o", "em", "de", "para", "com", "é"]
-        word = value.lower()
-        # Verifica se a palavra está na lista de palavras de parada
-        if word in stop_words:
-            return
-
-        value = self.remover_acentos_e_especiais(word)
         if self.root is None:
             self.root = Node(value)
         else:
             self._add_recursive(self.root, value)
-
-    def remover_acentos_e_especiais(self, texto):
-        """Função para remover acentos"""
-        # Remove acentos e caracteres especiais
-        texto_sem_acentos = unidecode(texto)
-
-        # Remove outros caracteres especiais (exceto letras e espaços)
-        texto_sem_especiais = re.sub(r'[^a-zA-Z\s]', '', texto_sem_acentos)
-
-        return texto_sem_especiais
 
     def _add_recursive(self, current_node, value):
         if value <= current_node.value:

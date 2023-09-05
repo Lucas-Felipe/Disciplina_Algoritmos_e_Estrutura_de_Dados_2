@@ -7,7 +7,11 @@ class AVLTree(BST):
     """ classe da Árvore AVL"""
     def __init__(self):
         super().__init__()
-    # This code is the same we had in the BST class
+    def add(self, value):
+        """
+        Overrides the add method in the BST class to handle AVL Tree balancing.
+        """
+        self.root = self._add_recursive(self.root, value)  # Note that self.root is updated here
     def _add_recursive(self, current_node, value):
         if current_node is None:
             return AVLNode(value)
@@ -28,6 +32,10 @@ class AVLTree(BST):
 
         # Update the height and imbalance factor for the current node
         current_node.calculate_height_and_imbalance()
+
+        # Check if tree balancing is needed and balance if necessary
+        if abs(current_node.imbalance) == 2:
+            return self._balance(current_node)
 
         return current_node
     def get_height(self):
@@ -149,13 +157,13 @@ class AVLTree(BST):
         if node is None:
             return
 
+        # print(node.value, node.value.startswith(prefix))
         if node.value.startswith(prefix):
             results.append(node.value)
 
         if prefix < node.value:
             self._search_prefix(node.left_child, prefix, results)
-        elif prefix > node.value:
-            self._search_prefix(node.right_child, prefix, results)
+        self._search_prefix(node.right_child, prefix, results)
 
     def search_words_with_prefix(self, prefix):
         """Função de procura palavra pelo prefixo"""

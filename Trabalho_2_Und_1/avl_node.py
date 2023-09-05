@@ -1,5 +1,5 @@
 """Arquivo da classe do nó de árvore AVL."""
-from Node import Node
+from node import Node
 
 class AVLNode(Node):
     """Nó de árvore AVL extendida de Nó de árvore de busca binária"""

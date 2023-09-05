@@ -1,5 +1,5 @@
 """Arquivo de classe representando uma árvore de busca binária"""
-from Node import Node
+from node import Node
 
 class BST:
     """Classe da Árvore de busca binária"""

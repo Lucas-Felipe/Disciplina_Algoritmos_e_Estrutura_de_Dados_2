@@ -1,5 +1,5 @@
 """Arquivo de classe representando uma árvore AVL"""
-from AVLTree import AVLTree
+from avl_tree import AVLTree
 
 text = input("Digite o texto: ")
 words = text.split()

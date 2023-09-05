@@ -1,7 +1,7 @@
 """Arquivo de classe representando uma árvore AVL"""
-from Node import Node
-from AVLNode import AVLNode
-from BST import BST
+from node import Node
+from avl_node import AVLNode
+from bst import BST
 
 class AVLTree(BST):
     """ classe da Árvore AVL"""

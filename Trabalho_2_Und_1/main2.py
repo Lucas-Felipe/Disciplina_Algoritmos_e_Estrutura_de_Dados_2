@@ -1,129 +1,111 @@
-# The AVLTree class is available
-import plotly.graph_objects as go
+"""Arquivo main para rodar programa principal"""
 import time
-import random
-from avl_tree import AVLTree
+import pandas as pd
+import re
+from unidecode import unidecode
+from data_visualization import visualize_avl_tree
 import plotly.express as px
+from bst import BST
 
-NUM_VALUES = 10000
+def remover_acentos_e_especiais(texto):
+    """Função para remover acentos"""
+    # Remove acentos e caracteres especiais
+    texto_sem_acentos = unidecode(texto)
 
-# # Test height with sequential inserts, the height should be much smaller than NUM_VALUES
-# avl = AVLTree()
-# for i in range(NUM_VALUES):
-#     avl.add(i)
-# print(avl.root.height)
-     
-# Test height with random inserts, the height should be much smaller than NUM_VALUES
-random.seed(0)
-rnd_values = [random.randint(1, 1000000) for _ in range(NUM_VALUES)]
-avl = AVLTree()
-for v in rnd_values:
-    avl.add(v)
-print(avl.root.height)
+    # Remove outros caracteres especiais (exceto letras e espaços)
+    texto_sem_especiais = re.sub(r'[^a-zA-Z\s]', '', texto_sem_acentos)
 
-# Test contains method
-for v in rnd_values:
-    assert avl.contains(v)
+    return texto_sem_especiais
+
+# text = input("Digite o texto: ")
+text = """É por isso que você é um Fdp!!! e desliguei. Aqui vale até uma sugestão: se existe algo que 
+realmente está lhe incomodando, você sempre pode fazer alguma coisa para se sentir melhor: simplesmente 
+disque o número de algum outro Fdp que você conheça, e diga para ele o que ele realmente é. Acontece que
+eu fui até o shopping, no centro da cidade, comprar umas camisas. Uma senhora estava demorando muito 
+tempo para tirar o carro de uma vaga no estacionamento. Cheguei a pensar que nunca fosse sair. 
+Finalmente seu carro começou a mover-se e a sair lentamente do seu espaço. Dadas às circunstâncias, 
+decidi retroceder meu carro um pouco para dar à senhora todo o espaço que fosse necessário: 'Grande!'
+pensei, 'finalmente vai embora'. Imediatamente, apareceu um Vectra preto vindo do outro lado do 
+estacionamento e entrou de frente na vaga da senhora que eu estava esperando. Comecei a tocar a 
+buzina e a gritar Dia após dia ela percebia cada vez mais longe o seu sonho, mas cada vez mais profundo o seu amor. Por fim, os seis meses haviam passado e nada havia brotado. Consciente do seu esforço e dedicação a moça comunicou a sua mãe que, independente das circunstâncias retornaria ao palácio, na data e hora combinadas, pois não pretendia nada além de mais alguns momentos na companhia do príncipe. Na hora marcada estava lá, com seu vaso vazio, bem como todas as outras pretendentes, cada uma com uma flor mais bela do que a outra, das mais variadas formas e cores. Ela estava admirada, nunca havia presenciado tão bela cena.4 Textos grandes, inspiradores e com lindas lições de vida! É cada um mais lindo que o outro, confira:
+1. A flor da honestidade
+Conta-se que por volta do ano 250 A.C, na China antiga, um príncipe da região norte do país, estava às vésperas de ser coroado imperador, mas, de acordo com a lei, ele deveria se casar. Sabendo disso, ele resolveu fazer uma “disputa” entre as moças da corte ou quem quer que se achasse digna de sua proposta.
+No dia seguinte, o príncipe anunciou que receberia, numa celebração especial, todas as pretendentes e lançaria um desafio. Uma velha senhora, serva do palácio há muitos anos, ouvindo os comentários sobre os preparativos, sentiu uma leve tristeza, pois sabia que sua jovem filha nutria um sentimento de profundo amor pelo príncipe.
+
+Ao chegar em casa e relatar o fato a jovem, espantou-se ao saber que ela pretendia ir à celebração, e indagou incrédula:
+
+ Minha filha, o que você fará lá? Estarão presentes todas as mais belas e ricas moças da corte. Tire esta ideia insensata da cabeça; eu sei que você deve estar sofrendo, mas não torne o sofrimento uma loucura.
+
+E a filha respondeu:
+
+Não, querida mãe, não estou sofrendo e muito menos louca, eu sei que jamais poderei ser a escolhida, mas é minha oportunidade de ficar pelo menos alguns momentos perto do príncipe, isto já me torna feliz.
+
+À noite, a jovem chegou ao palácio. Lá estavam, de fato, todas as mais belas moças, com as mais belas roupas, com as mais belas joias e com as mais determinadas intenções. Então, inicialmente, o príncipe anunciou o desafio:
+
+Darei a cada uma de vocês, uma semente. Aquela que, dentro de seis meses, me trouxer a mais bela flor, será escolhida minha esposa e futura imperatriz da China.
+
+A proposta do príncipe não fugiu as profundas tradições daquele povo, que valorizava muito a especialidade de “cultivar” algo, sejam costumes, amizades, relacionamentos, etc… O tempo passou e a doce jovem, como não tinha muita habilidade nas artes da jardinagem, cuidava com muita paciência e ternura a sua semente, pois sabia que se a beleza da flor surgisse na mesma extensão de seu amor, ela não precisava se preocupar com o resultado. Passaram-se três meses e nada surgiu. A jovem tudo tentara, usara de todos os métodos que conhecia, mas nada havia nascido.
+
+Dia após dia ela percebia cada vez mais longe o seu sonho, mas cada vez mais profundo o seu amor. Por fim, os seis meses haviam passado e nada havia brotado. Consciente do seu esforço e dedicação a moça comunicou a sua mãe que, independente das circunstâncias retornaria ao palácio, na data e hora combinadas, pois não pretendia nada além de mais alguns momentos na companhia do príncipe. Na hora marcada estava lá, com seu vaso vazio, bem como todas as outras pretendentes, cada uma com uma flor mais bela do que a outra, das mais variadas formas e cores. Ela estava admirada, nunca havia presenciado tão bela cena.
 
 
-# Generate experiment numbers (replace this with your actual experiment numbers)
-experiment_numbers = list(range(1, len(rnd_values) + 1))
+Finalmente chega o momento esperado e o príncipe observa cada uma das pretendentes com muito cuidado e atenção. Após passar por todas, uma a uma, ele anuncia o resultado e indica a bela jovem como sua futura esposa. As pessoas presentes tiveram as mais inesperadas reações. Ninguém compreendeu porque ele havia escolhido justamente aquela que nada havia cultivado. Então, calmamente o príncipe esclareceu:"""
+words = text.split()
+# print(words)
 
-times_list = []
+bst_tree = BST()
+times_search = []
 times_avl = []
 
-for v in rnd_values:
-    # Measure runtime for list
-    start = time.time()
-    v in rnd_values
-    end = time.time()
-    times_list.append(end - start)
+start = time.time()
+for word in words:
+    word = word.lower().replace(',','')
+    stop_words = ["a", "o", "em", "de", "para", "com", "é"]
+    word = remover_acentos_e_especiais(word)
+    # Verifica se a palavra está na lista de palavras de parada
+    if word not in stop_words:
+        bst_tree.add(word)
 
-    # Measure runtime for AVL
-    start = time.time()
-    avl.contains(v)
-    end = time.time()
-    times_avl.append(end - start)
+end = time.time()
+times_avl.append(end - start)
 
-# Convert to milliseconds for better visualization
-times_list_ms = [t * 1000 for t in times_list]
+bst_tree_sem_repeticao = bst_tree.remove_duplicates()
+sorted_unique_words = bst_tree_sem_repeticao.inorder_traversal(bst_tree_sem_repeticao.root)
+print("Palavras na árvore AVL ordenadas:")
+print(sorted_unique_words)
+bst_tree_sem_repeticao.print_tree()
+
+prefix = input("Digite o prefixo a ser buscado: ")
+prefix = prefix.lower()
+start = time.time()
+words_with_prefix = bst_tree_sem_repeticao.search_words_with_prefix(prefix)
+end = time.time()
+times_search.append(end - start)
+words_with_prefix.sort()
+
+if words_with_prefix:
+    print(f"Palavras com o prefixo '{prefix}':")
+    print(words_with_prefix)
+else:
+    print(f"Nenhuma palavra encontrada com o prefixo '{prefix}'.")
+
 times_avl_ms = [t * 1000 for t in times_avl]
+times_search_ms = [t * 1000 for t in times_search]
 
-# Create a Plotly figure as a scatter plot
+avg_avl = sum(times_avl_ms)/len(times_avl_ms)
+avg_search = sum(times_search_ms)/len(times_search_ms)
 
-fig = px.scatter(x=[experiment_numbers], y=times_list_ms, labels={"x": "Experiment Number", "y": "Runtime (ms)"},
-                 title="Runtime Comparison: List vs. AVL", template="plotly_dark")
-fig.add_scatter(x=experiment_numbers, y=times_avl_ms, mode='markers', name='AVL Tree', marker=dict(size=8))
+operations = ["Inserção","Pesquisa"]
+avg_times = [avg_avl, avg_search]
 
-# Update axes properties
-fig.update_xaxes(showline=True, linewidth=1, linecolor="gray")
-fig.update_yaxes(showline=True, linewidth=1, linecolor="gray")
-# Change the name in the legend
-fig.update_traces(name="List", selector=dict(name="wide_variable_0"))
+df = pd.DataFrame({
+        "Operação": ["Inserção"] * len(times_avl) + ["Pesquisa"] * len(times_search),
+        "Tempo (segundos)": times_avl + times_search
+    })
 
-# Show the figure
+# Criar um gráfico de dispersão com o Plotly Express
+fig = px.scatter(df, x="Operação", y="Tempo (segundos)", title="Tempo de Inserção e Pesquisa em uma Árvore AVL")
+
 fig.show()
-
-
-def visualize_avl_tree(avl_tree):
-    """
-    Visualize an AVL Tree using Plotly.
-    :param avl_tree: The AVLTree object to visualize
-    """
-    # Lists to store node values, hover texts, x and y coordinates, and edge coordinates
-    node_values = []
-    hover_texts = []
-    Xn, Yn = [], []
-    Xe, Ye = [], []
-
-    # Traversing the tree to collect node and edge data
-    def traverse(node, x=0, y=0, layer=1):
-        if node is not None:
-            node_values.append(node.value)
-            hover_texts.append(f"Value: {node.value}Height: {node.height}Imbalance: {node.imbalance}")
-            Xn.append(x)
-            Yn.append(y)
-            if node.left_child:
-                Xe.extend([x, x - layer])
-                Ye.extend([y, y - layer * 2])
-                traverse(node.left_child, x=x-layer, y=y-layer*2, layer=layer/2)
-            if node.right_child:
-                Xe.extend([x, x + layer])
-                Ye.extend([y, y - layer * 2])
-                traverse(node.right_child, x=x+layer, y=y-layer*2, layer=layer/2)
-
-    # Initialize traversal with the root node of the AVL tree
-    traverse(avl_tree.root)
-
-    # Create Plotly figure
-    fig = go.Figure()
-
-    # Add nodes (as scatter plot)
-    fig.add_trace(go.Scatter(x=Xn,
-                             y=Yn,
-                             mode='markers+text',
-                             name='Nodes',
-                             marker=dict(symbol='circle-dot',
-                                         size=30,
-                                         color='blue'),
-                             text=node_values,  # This will appear inside the node
-                             hoverinfo='text',
-                             hovertext=hover_texts,  # This will appear upon hover
-                             textposition='top center'))
-
-    # Add edges (as line plot)
-    fig.add_trace(go.Scatter(x=Xe,
-                             y=Ye,
-                             mode='lines',
-                             name='Edges',
-                             line=dict(width=1.5, color='gray')))
-
-    # Set layout properties
-    fig.update_layout(showlegend=False,
-                      hovermode='closest',
-                      xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                      yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
-
-    fig.show()
-
-visualize_avl_tree(avl)
+# visualize_avl_tree(avl_tree)
+# visualize_avl_tree(avl_tree_sem_repeticao)

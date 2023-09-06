@@ -48,3 +48,49 @@ class BST:
                     self._print_tree(root.left_child, level + 1, "L--- ")
                 if root.right_child:
                     self._print_tree(root.right_child, level + 1, "R--- ")
+    def remove_duplicates(self):
+        """Função de remoção de palavras duplicadas"""
+        unique_words = set()
+        self._remove_duplicates(self.root, unique_words)
+
+        # Cria uma nova árvore AVL com as palavras únicas
+        new_tree = BST()
+        for word in unique_words:
+            new_tree.add(word)
+
+        return new_tree
+    def _remove_duplicates(self, node, unique_words):
+        if node is None:
+            return
+
+        # Verifica se a palavra já foi adicionada ao conjunto de palavras únicas
+        if node.value not in unique_words:
+            unique_words.add(node.value)
+
+        # Recursivamente, remove duplicatas da subárvore esquerda e direita
+        self._remove_duplicates(node.left_child, unique_words)
+        self._remove_duplicates(node.right_child, unique_words)
+    def inorder_traversal(self, root):
+        """Ordena a árvore"""
+        result = []
+        if root:
+            result = self.inorder_traversal(root.left_child)
+            result.append(root.value)
+            result = result + self.inorder_traversal(root.right_child)
+        return result
+    def search_words_with_prefix(self, prefix):
+        """Função de procura palavra pelo prefixo"""
+        results = []
+        self._search_prefix(self.root, prefix, results)
+        return results
+    def _search_prefix(self, node, prefix, results):
+        if node is None:
+            return
+
+        # print(node.value, node.value.startswith(prefix))
+        if node.value.startswith(prefix):
+            results.append(node.value)
+
+        if prefix < node.value:
+            self._search_prefix(node.left_child, prefix, results)
+        self._search_prefix(node.right_child, prefix, results)

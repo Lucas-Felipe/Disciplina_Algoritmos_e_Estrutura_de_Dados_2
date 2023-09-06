@@ -1,10 +1,11 @@
+"""Arquivo main para rodar programa principal"""
 import time
 import pandas as pd
 import re
 from unidecode import unidecode
 from data_visualization import visualize_avl_tree
 import plotly.express as px
-from avl_tree import AVLTree
+from bst import BST
 
 def remover_acentos_e_especiais(texto):
     """Função para remover acentos"""
@@ -9285,7 +9286,7 @@ e-mail: info@wmfmartinsfontes.com.br http://www.wmfmartinsfontes.com.br
 words = text.split()
 # print(words)
 
-avl_tree = AVLTree()
+lista_palavras = []
 times_search = []
 times_avl = []
 
@@ -9296,27 +9297,34 @@ for word in words:
     word = remover_acentos_e_especiais(word)
     # Verifica se a palavra está na lista de palavras de parada
     if word not in stop_words:
-        avl_tree.add(word)
+        lista_palavras.append(word)
 
 end = time.time()
 times_avl.append(end - start)
 
-avl_tree_sem_repeticao = avl_tree.remove_duplicates()
-sorted_unique_words = avl_tree_sem_repeticao.inorder_traversal(avl_tree_sem_repeticao.root)
-print("Palavras na árvore AVL ordenadas:")
+conjunto = set(lista_palavras)
+sorted_unique_words = list(conjunto)
+print("Palavras na lista:")
 print(sorted_unique_words)
+
+def palavras_com_prefixo(lista_palavras, prefixo):
+    palavras_encontradas = []
+    for palavra in lista_palavras:
+        if palavra.startswith(prefixo):
+            palavras_encontradas.append(palavra)
+    return palavras_encontradas
 
 prefix = input("Digite o prefixo a ser buscado: ")
 prefix = prefix.lower()
 start = time.time()
-words_with_prefix = avl_tree_sem_repeticao.search_words_with_prefix(prefix)
+palavras_encontradas = palavras_com_prefixo(lista_palavras, prefix)
 end = time.time()
 times_search.append(end - start)
-words_with_prefix.sort()
 
-if words_with_prefix:
+
+if palavras_encontradas:
     print(f"Palavras com o prefixo '{prefix}':")
-    print(words_with_prefix)
+    print(palavras_encontradas)
 else:
     print(f"Nenhuma palavra encontrada com o prefixo '{prefix}'.")
 
@@ -9335,7 +9343,7 @@ df = pd.DataFrame({
     })
 
 # Criar um gráfico de dispersão com o Plotly Express
-fig = px.scatter(df, x="Operação", y="Tempo (segundos)", title="Tempo de Inserção e Pesquisa em uma Árvore AVL")
+fig = px.scatter(df, x="Operação", y="Tempo (segundos)", title="Tempo de Inserção e Pesquisa em uma lista")
 
 fig.show()
 # visualize_avl_tree(avl_tree)

@@ -79,14 +79,14 @@ class Inventory:
         """Função que retorna o primeiro laptop mais caro"""
         range_start = 0
         range_end = len(self.rows_by_price) - 1
-        result = -1  # Default to -1 if no laptop is more expensive
+        result = -1
 
         while range_start <= range_end:
             range_middle = (range_start + range_end) // 2
             current_price = float(self.rows_by_price[range_middle][-1])
 
             if current_price > price:
-                result = range_middle  
+                result = range_middle
                 range_end = range_middle - 1
             else:
                 range_start = range_middle + 1

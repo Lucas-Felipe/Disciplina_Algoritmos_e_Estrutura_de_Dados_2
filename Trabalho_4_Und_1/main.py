@@ -4,7 +4,7 @@ from inventory import Inventory
 
 inventario = Inventory('laptops.csv')
 
-laptop_faixa = inventario.find_laptops_in_price_range('990', '1000')
+laptop_faixa = inventario.find_laptops_in_price_range('995', '1000')
 
 print(len(laptop_faixa))
 

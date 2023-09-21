@@ -40,7 +40,7 @@ class Inventory:
         if laptop_id in self.id_to_row:
             return self.id_to_row[laptop_id]
         else:
-            None
+            return None
 
     def get_laptop_from_id(self, laptop_id):
         """Procura um dado id de um laptop passando por todos os itens num laço for"""

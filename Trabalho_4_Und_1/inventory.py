@@ -8,7 +8,7 @@ class Inventory:
         self.rows = []
         self.precos_inteiros = []
 
-        with open(csv_filename, 'r', newline='') as arquivo_csv:
+        with open(csv_filename, 'r', newline='', encoding='utf-8') as arquivo_csv:
             leitor_csv = csv.reader(arquivo_csv)
             self.header = next(leitor_csv)
 

@@ -98,24 +98,26 @@ class Inventory:
 
     def find_laptops_in_price_range(self, min_price, max_price):
         """Retorna uma lista de laptops dentro de uma faixa de preço."""
-        laptops_in_range = []
+        laptops_in_range = []                                   # 1
 
-        for row in self.rows:
-            price = float(row[-1])
-            if float(min_price) <= price <= float(max_price):
-                laptops_in_range.append(row)
+        for row in self.rows:                                   # N
+            price = float(row[-1])                              # N
+            if float(min_price) <= price <= float(max_price):   # N
+                laptops_in_range.append(row)                    # N
 
-        return laptops_in_range
+        return laptops_in_range                                 # 1
+    # 1 + N + N + N + N + 1 = 4N + 2 = O(N)
 
     def find_cheapest_laptop_with_specifications(self, specifications):
         """Busca o laptop mais barato com características específicas passadas numa lista"""
-        cheapest_laptop = None
-        min_price = float('inf')  
+        cheapest_laptop = None                                                      # 1
+        min_price = float('inf')                                                    # 1
 
-        for row in self.rows:
-            price = float(row[-1])
-            if all(spec in row for spec in specifications) and price < min_price:
-                cheapest_laptop = row
-                min_price = price
+        for row in self.rows:                                                       # N
+            price = float(row[-1])                                                  # N
+            if all(spec in row for spec in specifications) and price < min_price:   # N
+                cheapest_laptop = row                                               # N
+                min_price = price                                                   # N
 
-        return cheapest_laptop
+        return cheapest_laptop                                                      # 1
+        # 1 + 1 + N + N + N + N + N + 1 = 5N + 3 = O(N)

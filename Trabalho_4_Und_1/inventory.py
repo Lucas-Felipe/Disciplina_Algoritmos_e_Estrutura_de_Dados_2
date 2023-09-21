@@ -92,4 +92,27 @@ class Inventory:
                 range_start = range_middle + 1
 
         return result
-    
+
+    def find_laptops_in_price_range(self, min_price, max_price):
+        """Retorna uma lista de laptops dentro de uma faixa de preço."""
+        laptops_in_range = []
+
+        for row in self.rows:
+            price = float(row[-1])
+            if float(min_price) <= price <= float(max_price):
+                laptops_in_range.append(row)
+
+        return laptops_in_range
+
+    def find_cheapest_laptop_with_specifications(self, specifications):
+        """Busca o laptop mais barato com características específicas."""
+        cheapest_laptop = None
+        min_price = float('inf')  # Inicializa o preço mínimo com infinito positivo
+
+        for row in self.rows:
+            price = float(row[-1])
+            if all(spec in row for spec in specifications) and price < min_price:
+                cheapest_laptop = row
+                min_price = price
+
+        return cheapest_laptop

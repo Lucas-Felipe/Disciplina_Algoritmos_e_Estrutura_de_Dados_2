@@ -2,7 +2,9 @@
 import csv
 
 class Inventory:
-    """Classe inventário"""
+    """A classe inventário irá receber no construtor um arquivo .csv, 
+    irá apontar a primeira linha para um 'header' e o restante para uma lista rows,
+    Tentará converter os preços para inteiros e irá fazer uma ordenação pelos preços"""
     def __init__(self, csv_filename):
         self.header = None
         self.rows = []
@@ -36,7 +38,8 @@ class Inventory:
         self.rows_by_price = sorted(self.rows, key=lambda row: float(row[-1]))
 
     def get_laptop_from_id_fast(self, laptop_id):
-        """Procura um dado id de um laptop usando 'in'"""
+        """Procura um dado id de um laptop usando a função 'in' no dicionário criado com os id's 
+        dos laptops"""
         if laptop_id in self.id_to_row:
             return self.id_to_row[laptop_id]
         else:
@@ -76,7 +79,7 @@ class Inventory:
         return False
 
     def find_first_laptop_more_expensive(self, price):
-        """Função que retorna o primeiro laptop mais caro"""
+        """Função que retorna o primeiro laptop mais caro, com valor maior que o preço passado"""
         range_start = 0
         range_end = len(self.rows_by_price) - 1
         result = -1
@@ -105,9 +108,9 @@ class Inventory:
         return laptops_in_range
 
     def find_cheapest_laptop_with_specifications(self, specifications):
-        """Busca o laptop mais barato com características específicas."""
+        """Busca o laptop mais barato com características específicas passadas numa lista"""
         cheapest_laptop = None
-        min_price = float('inf')  # Inicializa o preço mínimo com infinito positivo
+        min_price = float('inf')  
 
         for row in self.rows:
             price = float(row[-1])

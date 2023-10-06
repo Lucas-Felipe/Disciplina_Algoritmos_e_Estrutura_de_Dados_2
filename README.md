@@ -7,4 +7,8 @@ DCA0209 - Turma 01 - 2023.2
 Lucas Felipe Galvão Silva  
 20200000723  
 
-Trabalho 2 da 1º unidade (https://www.loom.com/share/8f44dbe14d5b47ef9eb72e3924d2b9c3?sid=c28fe33b-98a8-437c-b155-1e65aa137958)
+Trabalho 2 da 1º unidade  
+https://www.loom.com/share/8f44dbe14d5b47ef9eb72e3924d2b9c3?sid=c28fe33b-98a8-437c-b155-1e65aa137958  
+
+Trabalho 4 da 1º unidade  
+https://www.loom.com/share/bd4a30aa74534ea28f5ae6d09438b96a?sid=57d86573-25b4-4cc1-885c-43873692a2cc

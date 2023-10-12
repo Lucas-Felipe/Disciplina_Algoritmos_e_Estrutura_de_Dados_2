@@ -1,7 +1,29 @@
-"""Arquivo do programa principal"""
+"""Arquivo do programa principal para a rede"""
 import itertools
 from carta import Carta
+import networkx as nx
 import matplotlib.pyplot as plt
+
+# Função para calcular a soma dos atributos de um setup
+def calcular_soma_atributos(setup):
+    """Calcula a soma de cada atributo advindo de cada carta"""
+    soma_speed = sum(carta.speed for carta in setup)
+    soma_power_unit = sum(carta.power_unit for carta in setup)
+    soma_cornering = sum(carta.cornering for carta in setup)
+    soma_reliability = sum(carta.reliability for carta in setup)
+    soma_avg_pit_stop_time = sum(carta.avg_pit_stop_time for carta in setup)
+    return soma_speed, soma_power_unit, soma_cornering, soma_reliability, soma_avg_pit_stop_time
+
+def calcular_team_score(setup):
+    """calcula o team score de cada setup"""
+    (soma_speed, soma_power_unit, soma_cornering, soma_reliability,
+     soma_avg_pit_stop_time) = calcular_soma_atributos(setup)
+    team_score = (soma_speed + soma_cornering + soma_power_unit + soma_reliability +
+                  (soma_avg_pit_stop_time / 0.02))
+    return team_score
+
+# Crie um novo grafo direcionado
+G = nx.DiGraph()
 
 # Lista de cartas para os freios
 cartas_breaks = [
@@ -75,63 +97,32 @@ cartas_engine = [
     Carta("Engine", "starter", 1,1,1,1,1)
 ]
 
-# Função para calcular a soma dos atributos de um setup
-def calcular_soma_atributos(setup):
-    """Calcula a soma de cada atributo advindo de cada carta"""
-    soma_speed = sum(carta.speed for carta in setup)
-    soma_power_unit = sum(carta.power_unit for carta in setup)
-    soma_cornering = sum(carta.cornering for carta in setup)
-    soma_reliability = sum(carta.reliability for carta in setup)
-    soma_avg_pit_stop_time = sum(carta.avg_pit_stop_time for carta in setup)
-    return soma_speed, soma_power_unit, soma_cornering, soma_reliability, soma_avg_pit_stop_time
-
-def calcular_team_score(setup):
-    """calcula o team score de cada setup"""
-    (soma_speed, soma_power_unit, soma_cornering, soma_reliability,
-     soma_avg_pit_stop_time) = calcular_soma_atributos(setup)
-    team_score = (soma_speed + soma_cornering + soma_power_unit + soma_reliability +
-                  (soma_avg_pit_stop_time / 0.02))
-    return team_score
-
-# Lista de todas as cartas disponíveis
+# Crie uma lista com todas as cartas disponíveis
 todas_as_cartas = [cartas_breaks, cartas_gearbox, cartas_rear_wing, cartas_front_wing,
                    cartas_suspension, cartas_engine]
+TEAM_SCORE_MAXIMO = 875
+# Crie combinações de todas as cartas possíveis
 combinacoes = list(itertools.product(*todas_as_cartas))
 
-# Calcule os team_scores de todas as combinações
-team_scores = [calcular_team_score(comb) for comb in combinacoes]
+# Adicione os nós (cartas) ao grafo
+for combo in combinacoes:
+    team_score = calcular_team_score(combo)
+    if team_score >= TEAM_SCORE_MAXIMO:  # Verifica se o Team Score atende ao critério
+        G.add_node(combo, team_score=team_score)
 
-team_scores_acima_de_750 = [score for score in team_scores if score >= 750]
+# Adicione as arestas (ligações) para todas as combinações possíveis
+for node1 in G.nodes:
+    for node2 in G.nodes:
+        if node1 != node2 and len(set(node1) ^ set(node2)) == 1:
+            G.add_edge(node1, node2)
 
-# Determine as faixas desejadas para o histograma
-faixas = list(range(400, int(max(team_scores_acima_de_750)) + 1, 25))
+# Crie um layout para visualização
+pos = nx.spring_layout(G)
 
-# Defina o ponto de corte
-PONTO_DE_CORTE = 750
+# Desenhe o grafo
+node_labels = {node: f"TS:{data['team_score']:.2f}" for node, data in G.nodes(data=True)}
+nx.draw(G, pos, with_labels=True, labels=node_labels, node_size=2000, font_size=8,
+        node_color='lightblue', font_color='black', font_weight='bold')
 
-# Crie um histograma com base nas faixas de team_scores
-n, bins, patches = plt.hist(team_scores_acima_de_750, bins=faixas, edgecolor='k', color='blue')
-
-# Encontre as barras após o ponto de corte e defina a cor como vermelha
-for i, bi in enumerate(bins):
-    if bi >= PONTO_DE_CORTE:
-        for patch in patches[i:]:
-            patch.set_fc('red')  # Define a cor da barra como vermelha
-
-# Adicione um ponto de corte na cor vermelha
-plt.axvline(x=PONTO_DE_CORTE, color='red', linestyle='--',
-            label=f'Ponto de Corte: {PONTO_DE_CORTE}')
-
-# Configure rótulos e título
-plt.xlabel('Team Score')
-plt.ylabel('Número de Ocorrências')
-plt.title('Distribuição dos Team Scores')
-plt.legend()  # Adicione uma legenda para o ponto de corte
-
-# Salve o gráfico
-plt.savefig('team_score_hist_22')
-# valores_entre_425_450 = []
-# for valor in team_scores:
-#     if 700 <= valor <= 725:
-#         valores_entre_425_450.append(valor)
-# print("tamanho: ", len(valores_entre_425_450))
+# Exiba o gráfico
+plt.savefig('rede_setups.png')

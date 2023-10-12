@@ -5,7 +5,7 @@ class Carta:
         self.tipo = tipo
         self.name = name
         self.speed = speed
-        self.power_unit = power_unit
         self.cornering = cornering
+        self.power_unit = power_unit
         self.reliability = reliability
         self.avg_pit_stop_time = avg_pit_stop_time

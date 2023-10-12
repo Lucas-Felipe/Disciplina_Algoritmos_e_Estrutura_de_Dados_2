@@ -1,7 +1,8 @@
 """Arquivo de classe para o setup do carro"""
 class Setup:
     """Classe do carro/setup"""
-    def __init__(self, speed, power_unit, cornering, reliability, avg_pit_stop_time, configuracao, team_score):
+    def __init__(self, speed, power_unit, cornering, reliability, avg_pit_stop_time, 
+                 configuracao, team_score):
         self.speed = speed
         self.power_unit = power_unit
         self.cornering = cornering

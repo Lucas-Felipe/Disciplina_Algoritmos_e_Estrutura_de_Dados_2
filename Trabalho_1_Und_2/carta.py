@@ -9,3 +9,7 @@ class Carta:
         self.power_unit = power_unit
         self.reliability = reliability
         self.avg_pit_stop_time = avg_pit_stop_time
+
+    def __str__(self):
+        return f"{self.name} ({self.tipo})"
+    

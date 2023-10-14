@@ -11,6 +11,9 @@ class Setup:
         self.configuracao = configuracao
         self.team_score = team_score
 
+    def __str__(self):
+        return f"{self.team_score}"
+
     def valida_atributos_max_220(self):
         """valida os valores dos atributos, máximo de 220"""
         if self.speed>220:

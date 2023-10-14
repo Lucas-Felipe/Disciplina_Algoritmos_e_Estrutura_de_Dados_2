@@ -107,7 +107,7 @@ team_scores_acima_de_750 = [score for score in team_scores if score >= 750]
 faixas = list(range(400, int(max(team_scores_acima_de_750)) + 1, 25))
 
 # Defina o ponto de corte
-PONTO_DE_CORTE = 750
+PONTO_DE_CORTE = 875
 
 # Crie um histograma com base nas faixas de team_scores
 n, bins, patches = plt.hist(team_scores_acima_de_750, bins=faixas, edgecolor='k', color='blue')
@@ -129,9 +129,9 @@ plt.title('Distribuição dos Team Scores')
 plt.legend()  # Adicione uma legenda para o ponto de corte
 
 # Salve o gráfico
-plt.savefig('team_score_hist_22')
-# valores_entre_425_450 = []
-# for valor in team_scores:
-#     if 700 <= valor <= 725:
-#         valores_entre_425_450.append(valor)
-# print("tamanho: ", len(valores_entre_425_450))
+plt.savefig('team_score_hist_23')
+valores_entre_425_450 = []
+for valor in team_scores:
+    if 890 <= valor <= 900:
+        valores_entre_425_450.append(valor)
+print("tamanho: ", len(valores_entre_425_450))

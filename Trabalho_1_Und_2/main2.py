@@ -100,29 +100,47 @@ cartas_engine = [
 # Crie uma lista com todas as cartas disponíveis
 todas_as_cartas = [cartas_breaks, cartas_gearbox, cartas_rear_wing, cartas_front_wing,
                    cartas_suspension, cartas_engine]
-TEAM_SCORE_MAXIMO = 875
-# Crie combinações de todas as cartas possíveis
-combinacoes = list(itertools.product(*todas_as_cartas))
+TEAM_SCORE_MAXIMO = 890
+# Crie nós para cada setup e adicione as cartas usadas em cada setup
+setups = list(itertools.product(cartas_breaks, cartas_gearbox, cartas_rear_wing, cartas_front_wing, cartas_suspension, cartas_engine))
+setup_nodes = {}
+setup_cards_used = {}
 
-# Adicione os nós (cartas) ao grafo
-for combo in combinacoes:
-    team_score = calcular_team_score(combo)
-    if team_score >= TEAM_SCORE_MAXIMO:  # Verifica se o Team Score atende ao critério
-        G.add_node(combo, team_score=team_score)
+for setup in setups:
+    team_score = calcular_team_score(setup)
+    if team_score >= TEAM_SCORE_MAXIMO:
+        setup_nodes[setup] = team_score
+        G.add_node(setup, team_score=team_score, node_type="setup")
+        setup_cards_used[setup] = [carta for carta in setup]
 
-# Adicione as arestas (ligações) para todas as combinações possíveis
-for node1 in G.nodes:
-    for node2 in G.nodes:
-        if node1 != node2 and len(set(node1) ^ set(node2)) == 1:
-            G.add_edge(node1, node2)
+# Adicione nós para as cartas usadas em setups
+for setup, cards_used in setup_cards_used.items():
+    for carta in cards_used:
+        G.add_node(carta, node_type="carta")
 
-# Crie um layout para visualização
-pos = nx.spring_layout(G)
+# Adicione arestas que representam as cartas usadas em cada setup
+for setup in setup_nodes:
+    for carta in setup_cards_used[setup]:
+        G.add_edge(setup, carta)
 
-# Desenhe o grafo
-node_labels = {node: f"TS:{data['team_score']:.2f}" for node, data in G.nodes(data=True)}
+# Inverta as direções das arestas
+G = G.reverse()
+
+# Crie grupos de nós para separar os nós de setup e cartas
+node_groups = {}
+for node in G.nodes():
+    node_groups[node] = 0 if G.nodes[node]["node_type"] == "setup" else 1
+
+# Defina o layout com shell_layout para posicionar os nós de setup no centro
+# e os nós de carta ao redor
+pos = nx.shell_layout(G, [list(setup_nodes.keys()), list(G.nodes())])
+
+# Rótulos dos nós (nomes das cartas ou Team Score)
+node_labels = {node: f"{setup_nodes[node]}" if G.nodes[node]["node_type"] == "setup" else str(node) for node in G.nodes()}
+
+# Desenhe o grafo com rótulos
 nx.draw(G, pos, with_labels=True, labels=node_labels, node_size=2000, font_size=8,
         node_color='lightblue', font_color='black', font_weight='bold')
 
 # Exiba o gráfico
-plt.savefig('rede_setups.png')
+plt.savefig('rede_setups_e_cartas_com_rotulos.png')

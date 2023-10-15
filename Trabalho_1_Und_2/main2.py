@@ -3,6 +3,7 @@ import itertools
 from carta import Carta
 import networkx as nx
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Função para calcular a soma dos atributos de um setup
 def calcular_soma_atributos(setup):
@@ -158,3 +159,21 @@ nx.draw(G, pos, with_labels=True, labels=node_labels, node_size=node_sizes, font
 
 # Exiba o gráfico
 plt.savefig('rede_setups_e_cartas_com_rotulos_e_cores.png')
+
+# Função de densidade de probabilidade para a propriedade "Out Degree" dos vértices de cartas
+def plot_out_degree_prob_density(graph):
+    sns.set(style="whitegrid")
+    plt.figure(figsize=(8, 6))
+    
+    # Calcula o "Out Degree" (número de conexões) para cada vértice de carta
+    out_degrees = [val for (node, val) in graph.out_degree if graph.nodes[node]["node_type"] == "carta"]
+    sns.kdeplot(out_degrees, shade=True, color="lightcoral")
+    
+    plt.xlabel("Out Degree (Número de Cartas por Setup)")
+    plt.ylabel("Density")
+    plt.title("PDF of Out Degree for Cards in Setups")
+    
+    plt.savefig('out_degree_prob_density.png')
+
+# Crie a função de densidade de probabilidade para o "Out Degree" das cartas
+plot_out_degree_prob_density(G)

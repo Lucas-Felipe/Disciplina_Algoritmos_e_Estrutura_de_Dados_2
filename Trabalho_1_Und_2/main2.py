@@ -113,6 +113,15 @@ for setup in setups:
         G.add_node(setup, team_score=team_score, node_type="setup")
         setup_cards_used[setup] = [carta for carta in setup]
 
+# Contagem da frequência de uso das cartas
+carta_usage_count = {}
+for setup, cards_used in setup_cards_used.items():
+    for carta in cards_used:
+        if carta in carta_usage_count:
+            carta_usage_count[carta] += 1
+        else:
+            carta_usage_count[carta] = 1
+
 # Adicione nós para as cartas usadas em setups
 for setup, cards_used in setup_cards_used.items():
     for carta in cards_used:
@@ -138,9 +147,14 @@ pos = nx.shell_layout(G, [list(setup_nodes.keys()), list(G.nodes())])
 # Rótulos dos nós (nomes das cartas ou Team Score)
 node_labels = {node: f"{setup_nodes[node]}" if G.nodes[node]["node_type"] == "setup" else str(node) for node in G.nodes()}
 
-# Desenhe o grafo com rótulos
-nx.draw(G, pos, with_labels=True, labels=node_labels, node_size=2000, font_size=8,
-        node_color='lightblue', font_color='black', font_weight='bold')
+# Calcula os tamanhos das bolas com base na frequência de uso das cartas
+node_sizes = [carta_usage_count[node] * 700 if G.nodes[node]["node_type"] == "carta" else 700 for node in G.nodes()]
+
+# Defina as cores dos nós e rótulos
+node_colors = ["lightcoral" if G.nodes[node]["node_type"] == "setup" else "lightblue" for node in G.nodes()]
+
+# Desenhe o grafo com rótulos, tamanhos e cores personalizadas
+nx.draw(G, pos, with_labels=True, labels=node_labels, node_size=node_sizes, font_size=8, node_color=node_colors, font_color="black", font_weight="bold", edge_color="black")
 
 # Exiba o gráfico
-plt.savefig('rede_setups_e_cartas_com_rotulos.png')
+plt.savefig('rede_setups_e_cartas_com_rotulos_e_cores.png')

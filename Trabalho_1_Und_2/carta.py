@@ -12,7 +12,7 @@ class Carta:
 
     def __str__(self):
         return f"{self.name} ({self.tipo})"
-    
+
     def calcular_atributos(self):
         """Retorna um dicionário com os atributos da carta"""
         return {

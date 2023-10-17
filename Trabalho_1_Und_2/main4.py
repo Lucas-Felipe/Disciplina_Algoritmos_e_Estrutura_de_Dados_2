@@ -1,9 +1,8 @@
 """Programa principal para o item 4"""
-from itertools import combinations, product
+from itertools import combinations
 from piloto import Piloto
 from carta import Carta
 from boost import Boost
-from setup import Setup
 
 boosts = [
     Boost("Reindeer", 0, 0, 10, 20, 0, 0, 20, 0, 0),
@@ -116,13 +115,14 @@ def team_score(piloto, setup, boost):
                       setup.reliability,setup.avg_pit_stop_time / 0.02]
     boost_metrics = [getattr(boost, "speed"), getattr(boost, "cornering"),
                      getattr(boost, "power_unit"), getattr(boost, "reliability"),
-                     getattr(boost, "avg_pit_stop_time") / 0.02, getattr(boost, "overtaking"), 
+                     getattr(boost, "avg_pit_stop_time") / 0.02, getattr(boost, "overtaking"),
                      getattr(boost, "defending"), getattr(boost, "qualifying"),
                      getattr(boost, "race_start"), getattr(boost, "tyre_management")]
     return sum(piloto_metrics) + sum(setup_metrics) + sum(boost_metrics)
 
 # Função para calcular a soma dos atributos de uma combinação de cartas
 def calcular_soma_atributos(comb):
+    """Calcula a soma dos atributos do setup"""
     soma_atributos = {
         "speed": 0,
         "power_unit": 0,
@@ -140,7 +140,8 @@ def calcular_soma_atributos(comb):
 
 # Todas as combinações possíveis de 6 cartas
 todas_combinacoes = list(combinations(
-    cartas_breaks + cartas_gearbox + cartas_rear_wing + cartas_front_wing + cartas_suspension + cartas_engine, 6))
+    cartas_breaks + cartas_gearbox + cartas_rear_wing + cartas_front_wing + cartas_suspension +
+    cartas_engine, 6))
 
 # Encontrar combinações com soma de atributos maior que 875
 comb_validas = []

@@ -1,7 +1,7 @@
 """Arquivo de classe para boost de vantagem"""
 class Boost:
     """Classe dos boosts"""
-    def __init__(self, name, speed, power_unit, cornering, reliability, avg_pit_stop_time, 
+    def __init__(self, name, speed, power_unit, cornering, reliability, avg_pit_stop_time,
                  overtaking, defending, race_start, tyre_management):
         self.name = name
         self.speed = speed

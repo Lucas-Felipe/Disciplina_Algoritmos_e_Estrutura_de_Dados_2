@@ -130,8 +130,8 @@ plt.legend()  # Adicione uma legenda para o ponto de corte
 
 # Salve o gráfico
 plt.savefig('team_score_hist_23')
-valores_entre_425_450 = []
-for valor in team_scores:
-    if 890 <= valor <= 900:
-        valores_entre_425_450.append(valor)
-print("tamanho: ", len(valores_entre_425_450))
+# valores_entre_425_450 = []
+# for valor in team_scores:
+#     if 890 <= valor <= 900:
+#         valores_entre_425_450.append(valor)
+# print("tamanho: ", len(valores_entre_425_450))

@@ -13,3 +13,12 @@ class Carta:
     def __str__(self):
         return f"{self.name} ({self.tipo})"
     
+    def calcular_atributos(self):
+        """Retorna um dicionário com os atributos da carta"""
+        return {
+            "speed": self.speed,
+            "power_unit": self.power_unit,
+            "cornering": self.cornering,
+            "reliability": self.reliability,
+            "avg_pit_stop_time": self.avg_pit_stop_time
+        }

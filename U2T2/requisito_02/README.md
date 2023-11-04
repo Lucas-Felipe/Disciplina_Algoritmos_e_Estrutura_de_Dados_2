@@ -2,19 +2,19 @@ As 5 redes escolhidas foram: Deezer (rede social de usuários da Deezer Europa),
 
 Utilizando a comando do NetworkX para cálculo dos graus dos nós e média dos graus dos nós vizinhos (nx.average_degree_connectivity) e plotando os resultados obtivemos os seguintes gráficos:
 
-Deezer
+Deezer   
 ![dezzer_graph](deezer_graph.png "Deezer")
 
-Facebook
+Facebook   
 ![facebook_graph](facebook_graph.png "Facebook")
 
-GitHub
+GitHub   
 ![github_graph](github_graph.png "GitHub")
 
-Twitch
+Twitch   
 ![twitch_graph](twitch_graph.png "Twitch")
 
-Last FM
+Last FM   
 ![lastfm_graph](lastfm_graph.png "Last FM")
 
 Com essa relação de grau do nó por média dos graus dos nós vizinhos podemos saber a assortatividade dessas redes.

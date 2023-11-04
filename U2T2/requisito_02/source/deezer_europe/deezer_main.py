@@ -35,30 +35,19 @@ for index, row in target_data.iterrows():
     node_id, target_value = row["id"], row["target"]
     G.nodes[node_id]["target"] = target_value
 
-# Calcule os graus dos nós e dos vizinhos
-node_degrees = dict(G.degree())
-neighbor_degrees = {node: sum(node_degrees[neighbor]
-                              for neighbor in G.neighbors(node))
-                              for node in G.nodes()}
+graudono, media_grau_vizinhos = zip(*nx.average_degree_connectivity(G).items())
+
+# Ajuste de curva para encontrar a reta de interpolação
+coefficients = np.polyfit(graudono, media_grau_vizinhos, 1)
+polynomial = np.poly1d(coefficients)
 
 # Crie um gráfico de dispersão
 plt.figure(figsize=(10, 6))
-plt.scatter(list(node_degrees.values()), list(neighbor_degrees.values()), alpha=0.5)
-plt.xlabel('Grau dos Nós')
-plt.ylabel('Grau dos Vizinhos')
-plt.title('Gráfico de Dispersão: Grau dos Nós vs. Grau dos Vizinhos')
+plt.scatter(graudono, media_grau_vizinhos, alpha=0.5)
+plt.plot(graudono, polynomial(graudono), color='red', label='Reta de Interpolação')
+plt.xlabel('Grau do Nó')
+plt.ylabel('Média do Grau dos Vizinhos')
+plt.title('Gráfico de Dispersão com Reta de Interpolação')
 plt.grid(True)
-
-# Calcule a reta de melhor ajuste (linear) usando a função polyfit do NumPy
-x = np.array(list(node_degrees.values()))
-y = np.array(list(neighbor_degrees.values()))
-slope, intercept = np.polyfit(x, y, 1)
-
-# Crie a reta linear a partir dos coeficientes
-line = slope * x + intercept
-
-# Adicione a reta linear ao gráfico
-plt.plot(x, line, color='red', label='Reta Linear de Melhor Ajuste')
-
 plt.legend()
 plt.show()

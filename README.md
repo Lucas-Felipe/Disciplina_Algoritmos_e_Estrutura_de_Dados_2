@@ -15,4 +15,8 @@ https://www.loom.com/share/bd4a30aa74534ea28f5ae6d09438b96a?sid=57d86573-25b4-4c
 
 Trabalho 1 da 2º unidade    
 membros deste trabalho: Lucas Felipe e Gabriel Cruz
-https://www.loom.com/share/5b54cf9eaf704b22811740ee736bda0c?sid=5f46f788-72a9-42ef-87f4-ed7b59093b61
+https://www.loom.com/share/5b54cf9eaf704b22811740ee736bda0c?sid=5f46f788-72a9-42ef-87f4-ed7b59093b61  
+
+Trabalho 2 da 2º unidade  
+https://github.com/Lucas-Felipe/Disciplina_Algoritmos_e_Estrutura_de_Dados_2/tree/main/U2T2  
+https://www.loom.com/share/10d6f91f54264e99a05b55997ac42c0b?sid=0433e9f2-8662-4b56-83d9-d38542beecfb

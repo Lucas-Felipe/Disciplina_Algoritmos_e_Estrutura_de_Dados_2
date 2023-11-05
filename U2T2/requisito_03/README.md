@@ -1,0 +1,6 @@
+|   Rede   | Quantidade de Vértices | Quantidade de Arestas | Coeficiente de Grau de Assortatividade | Quantidade de Componentes Conectados | Tamanho do Componente Gigante (GCC) | Coeficiente de Clustering Médio |
+|:-------:|:-----------------------:|:----------------------:|:------------------------------------:|:-----------------------------------:|:----------------------------------:|:-------------------------------:|
+|  Deezer  |          28,281         |         92,752         |              0.104127               |                 1                 |             28,281             |           0.141160            |
+| Facebook |          22,470         |        171,002         |              0.085058               |                 1                 |             22,470             |           0.359738            |
+|  GitHub  |          37,700         |        289,003         |             -0.075217               |                 1                 |             37,700             |           0.167537            |
+| Last FM  |           7,624         |         27,806         |              0.017073               |                 1                 |              7,624             |           0.219418            |

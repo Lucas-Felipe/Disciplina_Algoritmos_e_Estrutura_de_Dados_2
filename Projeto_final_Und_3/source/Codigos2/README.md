@@ -52,8 +52,8 @@ Fazendo uma correlação com as rodovias da cidade e as métricas de rede, podem
 
 Podemos também fazer uma análise de infraestrutura da cidade baseado nessas informações do grafo, como por exemplo, os pontos de maior valor de auto vetor e coeficiente de clustering são relativamente próximos, então é uma área bastante importante da cidade com aglomeração de ruas, que caso não possua sinalização correta e estrutura podem causar problemas de tráfego para a cidade, seria uma área a se investir em sinalização e estrutura de rodovia na cidade.
 
-O ponto de maior closeness seria um bom local para um serviço essencial da cidade, já que é ponto mais próximo de tudo.
+O ponto de maior grau também necessita de uma estrutura e sinalização para que não ocorra problema de tráfego.
 
-O ponto de maior grau também necessita de uma estrutura e sinalização para que não ocorra problema de tráfego, porém, devido sua instável mudança, se torna um ponto de menor importância, já que ele pode não refletir no ponto principal da métrica, é necessário um estudo melhor para definir algo sobre essa métrica.
+O ponto de maior closeness seria um bom local para um serviço essencial da cidade, já que é ponto mais próximo de tudo, porém, devido sua instável definição quando alteramos o tamanho da rede, um estudo melhor teria de ser desenvolvido para a sua definição.
 
-O ponto de maior betweenness, assim como o de maior grau, também se torna de menos importância devido sua fácil alteração, um ponto que faz maior interligação entre rodovias também necessita de uma atenção.
+O ponto de maior betweenness, assim como o de maior closeness, também se torna de menos importância devido sua fácil alteração, um ponto que faz maior interligação entre rodovias também necessita de uma atenção.

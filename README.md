@@ -20,3 +20,10 @@ https://www.loom.com/share/5b54cf9eaf704b22811740ee736bda0c?sid=5f46f788-72a9-42
 Trabalho 2 da 2º unidade  
 pasta do trabalho: https://github.com/Lucas-Felipe/Disciplina_Algoritmos_e_Estrutura_de_Dados_2/tree/main/U2T2  
 vídeo: https://www.loom.com/share/10d6f91f54264e99a05b55997ac42c0b?sid=0433e9f2-8662-4b56-83d9-d38542beecfb
+
+Trabalho final - unidade 3
+pasta do trabalho: https://github.com/Lucas-Felipe/Disciplina_Algoritmos_e_Estrutura_de_Dados_2/tree/main/Projeto_final_Und_3
+
+Vídeos: https://www.loom.com/share/dfb09a7148e64278b7f015e3c3cc24a4?sid=2b681f3f-e872-4928-908d-98fe7b2619df
+
+https://www.loom.com/share/c6f220ed38bb4fc0a9e69a4c0c061f54?sid=63764997-7527-4274-973d-fbdc272aba6e

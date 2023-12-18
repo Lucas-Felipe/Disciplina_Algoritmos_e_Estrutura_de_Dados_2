@@ -4,7 +4,7 @@ Explicando Essa parte do projeto, geramos o grafo das rodovias da cidade com o m
 
 Como vocês podem ver, é gerado vários nós interligados que mapeiam as rodovias da cidade, formando o mapa que queremos analisar.
 
-Com o grafo em mãos, podemos rodar as métricas utilizando o NetworkX. Vale salientar que diferentes redes foram geradas para o mesmo local, pois, a função de delimitação manual do open street map não é tão precisa, como demonstração, as próximas redes foram geradas com diferença de que a posterior é mais compacta do que a anterior.
+Com o grafo em mãos, podemos rodar as métricas utilizando o NetworkX. Vale salientar que diferentes redes foram geradas para o mesmo local, pois, a função de delimitação manual do open street map não é tão precisa, como demonstração, a próxima rede foi gerada com diferença de que ela é mais compacta do que a rede mostrada anteriormente.
 
 ![Grafo do mapa de rodovias de Santa Cruz, mais largo](download-1.png)
 

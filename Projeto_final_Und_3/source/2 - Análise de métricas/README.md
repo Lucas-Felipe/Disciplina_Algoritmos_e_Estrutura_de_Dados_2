@@ -56,4 +56,4 @@ O ponto de maior grau também necessita de uma estrutura e sinalização para qu
 
 O ponto de maior closeness seria um bom local para um serviço essencial da cidade, já que é ponto mais próximo de tudo, porém, devido sua instável definição quando alteramos o tamanho da rede, um estudo melhor teria de ser desenvolvido para a sua definição.
 
-O ponto de maior betweenness, assim como o de maior closeness, também se torna de menos importância devido sua fácil alteração, um ponto que faz maior interligação entre rodovias também necessita de uma atenção.
+O ponto de maior betweenness, assim como o de maior closeness, também se torna de menos importância devido sua fácil alteração de acordo com o tamanho do mapa, um ponto que faz maior interligação entre rodovias também necessita de uma atenção.

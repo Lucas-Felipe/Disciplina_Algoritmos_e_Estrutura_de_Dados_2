@@ -20,3 +20,12 @@ Alguns resultados de 3 redes diferentes para a mesma área da cidade de santa cr
 
 ![métricas mapa 4](image-3.png)
 
+Repare que as métricas mudam, o que torna a escolha da área delimitada um ponto cruscial para uma melhor análise do mapa.
+
+A seguir, plotamos num mapa interativoos pontos relevantes de cada mapa:
+
+![mapa interativo 1](image-4.png)
+
+![mapa interativo 2](image-5.png)
+
+![mapa interativo 3](image-6.png)

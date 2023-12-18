@@ -22,10 +22,31 @@ Alguns resultados de 3 redes diferentes para a mesma área da cidade de santa cr
 
 Repare que as métricas mudam, o que torna a escolha da área delimitada um ponto cruscial para uma melhor análise do mapa.
 
-A seguir, plotamos num mapa interativoos pontos relevantes de cada mapa:
+A seguir, plotamos num mapa interativo pontos relevantes de cada mapa:
 
 ![mapa interativo 1](image-4.png)
 
 ![mapa interativo 2](image-5.png)
 
 ![mapa interativo 3](image-6.png)
+
+Podemos observar pontos em comum nos 3 mapas, se pegarmos as características delas veremos que:
+- O ponto entre os bairros de Vila Rica e Conjunto Cônego Monte é o que possui maior grau.
+
+- O ponto perto da letra 'z' no nome da cidade é o que possui o maior valor de coeficiente de clustering.
+
+- O ponto perto da letra 's' no nome da cidade é o que possui maior valor de auto vetor.
+
+- E os dois pontos que sobram, são os que se alteram de importância quando alteramos o tamanho do mapa/rede. Eles estão relacionados as métricas de betweenness e closeness.
+
+Fazendo uma correlação com as rodovias da cidade e as métricas de rede, podemos concluir que:
+- O ponto com maior grau representa o ponto da rodovia que se conecta com mais outros nós, ou seja, se conecta com mais ruas.
+
+- O ponto com maior coeficiente de clustering representa o ponto da cidade que possui mais algomerações de ruas.
+
+- O ponto com maior valor de auto vetor significa que é o ponto de maior interesse em meio a outros ponto de importância relevante e até da rede em geral, essa métrica talvez seja a mais importante, que denota a rua mais importante.
+
+- O ponto com maior valor de betweenness siginifica um ponto que é crucial para conexão da rede, no caso das rodovias, é uma rodovia que faz mais interligação com outras rodovias.
+
+- E o ponto com maior closeness significa que aquele ponto é o que está mais perto de todos os pontos do grafo em relação à qualquer outro ponto do grafo.
+
